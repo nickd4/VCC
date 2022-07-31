@@ -281,9 +281,9 @@ case Page2:
 		{
 
 		case LBEQ_R: //1027
+			*spostword=MemRead16(pc.Reg);
 			if (cc[Z])
 			{
-				*spostword=MemRead16(pc.Reg);
 				pc.Reg+=*spostword;
 				CycleCounter+=1;
 			}
@@ -292,14 +292,15 @@ case Page2:
 			break;
 
 		case LBRN_R: //1021
+			*spostword=MemRead16(pc.Reg);
 			pc.Reg+=2;
 			CycleCounter+=5;
 			break;
 
 		case LBHI_R: //1022
+			*spostword=MemRead16(pc.Reg);
 			if  (!(cc[C] | cc[Z]))
 			{
-				*spostword=MemRead16(pc.Reg);
 				pc.Reg+=*spostword;
 				CycleCounter+=1;
 			}
@@ -308,9 +309,9 @@ case Page2:
 			break;
 
 		case LBLS_R: //1023
+			*spostword=MemRead16(pc.Reg);
 			if (cc[C] | cc[Z])
 			{
-				*spostword=MemRead16(pc.Reg);
 				pc.Reg+=*spostword;
 				CycleCounter+=1;
 			}
@@ -319,9 +320,9 @@ case Page2:
 			break;
 
 		case LBHS_R: //1024
+			*spostword=MemRead16(pc.Reg);
 			if (!cc[C])
 			{
-				*spostword=MemRead16(pc.Reg);
 				pc.Reg+=*spostword;
 				CycleCounter+=1;
 			}
@@ -330,9 +331,9 @@ case Page2:
 			break;
 
 		case LBCS_R: //1025
+			*spostword=MemRead16(pc.Reg);
 			if (cc[C])
 			{
-				*spostword=MemRead16(pc.Reg);
 				pc.Reg+=*spostword;
 				CycleCounter+=1;
 			}
@@ -341,9 +342,9 @@ case Page2:
 			break;
 
 		case LBNE_R: //1026
+			*spostword=MemRead16(pc.Reg);
 			if (!cc[Z])
 			{
-				*spostword=MemRead16(pc.Reg);
 				pc.Reg+=*spostword;
 				CycleCounter+=1;
 			}
@@ -352,9 +353,9 @@ case Page2:
 			break;
 
 		case LBVC_R: //1028
+			*spostword=MemRead16(pc.Reg);
 			if ( !cc[V])
 			{
-				*spostword=MemRead16(pc.Reg);
 				pc.Reg+=*spostword;
 				CycleCounter+=1;
 			}
@@ -363,9 +364,9 @@ case Page2:
 			break;
 
 		case LBVS_R: //1029
+			*spostword=MemRead16(pc.Reg);
 			if ( cc[V])
 			{
-				*spostword=MemRead16(pc.Reg);
 				pc.Reg+=*spostword;
 				CycleCounter+=1;
 			}
@@ -374,9 +375,9 @@ case Page2:
 			break;
 
 		case LBPL_R: //102A
-		if (!cc[N])
+			*spostword=MemRead16(pc.Reg);
+			if (!cc[N])
 			{
-				*spostword=MemRead16(pc.Reg);
 				pc.Reg+=*spostword;
 				CycleCounter+=1;
 			}
@@ -385,9 +386,9 @@ case Page2:
 			break;
 
 		case LBMI_R: //102B
-		if ( cc[N])
+			*spostword=MemRead16(pc.Reg);
+			if ( cc[N])
 			{
-				*spostword=MemRead16(pc.Reg);
 				pc.Reg+=*spostword;
 				CycleCounter+=1;
 			}
@@ -396,9 +397,9 @@ case Page2:
 			break;
 
 		case LBGE_R: //102C
+			*spostword=MemRead16(pc.Reg);
 			if (! (cc[N] ^ cc[V]))
 			{
-				*spostword=MemRead16(pc.Reg);
 				pc.Reg+=*spostword;
 				CycleCounter+=1;
 			}
@@ -407,9 +408,9 @@ case Page2:
 			break;
 
 		case LBLT_R: //102D
+			*spostword=MemRead16(pc.Reg);
 			if ( cc[V] ^ cc[N])
 			{
-				*spostword=MemRead16(pc.Reg);
 				pc.Reg+=*spostword;
 				CycleCounter+=1;
 			}
@@ -418,9 +419,9 @@ case Page2:
 			break;
 
 		case LBGT_R: //102E
+			*spostword=MemRead16(pc.Reg);
 			if ( !( cc[Z] | (cc[N]^cc[V] ) ))
 			{
-				*spostword=MemRead16(pc.Reg);
 				pc.Reg+=*spostword;
 				CycleCounter+=1;
 			}
@@ -429,9 +430,9 @@ case Page2:
 			break;
 
 		case LBLE_R:	//102F
+			*spostword=MemRead16(pc.Reg);
 			if ( cc[Z] | (cc[N]^cc[V]) )
 			{
-				*spostword=MemRead16(pc.Reg);
 				pc.Reg+=*spostword;
 				CycleCounter+=1;
 			}
@@ -927,105 +928,105 @@ case BRA_R: //20
 	break;
 
 case BRN_R: //21
+	*spostbyte=MemRead8(pc.Reg++);
 	CycleCounter+=3;
-	pc.Reg++;
 	break;
 
 case BHI_R: //22
+	*spostbyte=MemRead8(pc.Reg++);
 	if  (!(cc[C] | cc[Z]))
-		pc.Reg+=(signed char)MemRead8(pc.Reg);
-	pc.Reg++;
+		pc.Reg+=*spostbyte;
 	CycleCounter+=3;
 	break;
 
 case BLS_R: //23
+	*spostbyte=MemRead8(pc.Reg++);
 	if (cc[C] | cc[Z])
-		pc.Reg+=(signed char)MemRead8(pc.Reg);
-	pc.Reg++;
+		pc.Reg+=*spostbyte;
 	CycleCounter+=3;
 	break;
 
 case BHS_R: //24
+	*spostbyte=MemRead8(pc.Reg++);
 	if (!cc[C])
-		pc.Reg+=(signed char)MemRead8(pc.Reg);
-	pc.Reg++;
+		pc.Reg+=*spostbyte;
 	CycleCounter+=3;
 	break;
 
 case BLO_R: //25
+	*spostbyte=MemRead8(pc.Reg++);
 	if (cc[C])
-		pc.Reg+=(signed char)MemRead8(pc.Reg);
-	pc.Reg++;
+		pc.Reg+=*spostbyte;
 	CycleCounter+=3;
 	break;
 
 case BNE_R: //26
+	*spostbyte=MemRead8(pc.Reg++);
 	if (!cc[Z])
-		pc.Reg+=(signed char)MemRead8(pc.Reg);
-	pc.Reg++;
+		pc.Reg+=*spostbyte;
 	CycleCounter+=3;
 	break;
 
 case BEQ_R: //27
+	*spostbyte=MemRead8(pc.Reg++);
 	if (cc[Z])
-		pc.Reg+=(signed char)MemRead8(pc.Reg);
-	pc.Reg++;
+		pc.Reg+=*spostbyte;
 	CycleCounter+=3;
 	break;
 
 case BVC_R: //28
+	*spostbyte=MemRead8(pc.Reg++);
 	if (!cc[V])
-		pc.Reg+=(signed char)MemRead8(pc.Reg);
-	pc.Reg++;
+		pc.Reg+=*spostbyte;
 	CycleCounter+=3;
 	break;
 
 case BVS_R: //29
+	*spostbyte=MemRead8(pc.Reg++);
 	if ( cc[V])
-		pc.Reg+=(signed char)MemRead8(pc.Reg);
-	pc.Reg++;
+		pc.Reg+=*spostbyte;
 	CycleCounter+=3;
 	break;
 
 case BPL_R: //2A
+	*spostbyte=MemRead8(pc.Reg++);
 	if (!cc[N])
-		pc.Reg+=(signed char)MemRead8(pc.Reg);
-	pc.Reg++;
+		pc.Reg+=*spostbyte;
 	CycleCounter+=3;
 	break;
 
 case BMI_R: //2B
+	*spostbyte=MemRead8(pc.Reg++);
 	if ( cc[N])
-		pc.Reg+=(signed char)MemRead8(pc.Reg);
-	pc.Reg++;
+		pc.Reg+=*spostbyte;
 	CycleCounter+=3;
 	break;
 
 case BGE_R: //2C
+	*spostbyte=MemRead8(pc.Reg++);
 	if (! (cc[N] ^ cc[V]))
-		pc.Reg+=(signed char)MemRead8(pc.Reg);
-	pc.Reg++;
+		pc.Reg+=*spostbyte;
 	CycleCounter+=3;
 	break;
 
 case BLT_R: //2D
+	*spostbyte=MemRead8(pc.Reg++);
 	if ( cc[V] ^ cc[N])
-		pc.Reg+=(signed char)MemRead8(pc.Reg);
-	pc.Reg++;
+		pc.Reg+=*spostbyte;
 	CycleCounter+=3;
 	break;
 
 case BGT_R: //2E
+	*spostbyte=MemRead8(pc.Reg++);
 	if ( !( cc[Z] | (cc[N]^cc[V] ) ))
-		pc.Reg+=(signed char)MemRead8(pc.Reg);
-	pc.Reg++;
+		pc.Reg+=*spostbyte;
 	CycleCounter+=3;
 	break;
 
 case BLE_R: //2F
+	*spostbyte=MemRead8(pc.Reg++);
 	if ( cc[Z] | (cc[N]^cc[V]) )
-		pc.Reg+=(signed char)MemRead8(pc.Reg);
-	pc.Reg++;
+		pc.Reg+=*spostbyte;
 	CycleCounter+=3;
 	break;
 
