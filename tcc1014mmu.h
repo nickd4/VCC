@@ -31,8 +31,8 @@ unsigned char * Getext_rom_pointer(void);
 unsigned short GetMem(long);
 void SetMem(long, unsigned short);
 
-void __fastcall fMemWrite8(unsigned char,unsigned short );
-unsigned char __fastcall fMemRead8(short unsigned int);
+void /*__fastcall*/ fMemWrite8(unsigned char,unsigned short );
+unsigned char /*__fastcall*/ fMemRead8(short unsigned int);
 
 int load_int_rom(char * );
 void SetMapType(unsigned char);

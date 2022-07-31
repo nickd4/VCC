@@ -16,7 +16,7 @@ This file is part of VCC (Virtual Color Computer).
     along with VCC (Virtual Color Computer).  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "windows.h"
+//#include "windows.h"
 #include "stdio.h"
 #include "mc6809.h"
 #include "mc6809defs.h"
@@ -30,14 +30,14 @@ This file is part of VCC (Virtual Color Computer).
 #define OTEST16(c,a,b,r) c ^ (((a^b^r)>>15)&1);
 #define ZTEST(r) !r;
 
-typedef union
+/*typedef union
 {
 	unsigned short Reg;
 	struct
 	{
 		unsigned char lsb,msb;
 	} B;
-} cpuregister;
+} cpuregister;*/
 
 #define D_REG	d.Reg
 #define PC_REG	pc.Reg
@@ -48,8 +48,8 @@ typedef union
 #define A_REG	d.B.msb
 #define B_REG	d.B.lsb
 
-static cpuregister pc,x,y,u,s,dp,d;
-static unsigned int cc[8];
+/*static*/ cpuregister pc,x,y,u,s,dp,d;
+/*static*/ unsigned int cc[8];
 static unsigned char *ureg8[8]; 
 static unsigned char ccbits;
 static unsigned short *xfreg16[8];
@@ -69,7 +69,7 @@ static char InInterupt=0;
 //END Global variables for CPU Emulation-------------------
 
 //Fuction Prototypes---------------------------------------
-_inline unsigned short CalculateEA(unsigned char);
+/*_inline*/static __attribute__((always_inline)) unsigned short CalculateEA(unsigned char);
 static void setcc (unsigned char);
 static unsigned char getcc(void);
 static void cpu_firq(void);
@@ -3313,7 +3313,7 @@ unsigned char getcc(void)
 	for (bit=0;bit<=7;bit++)
 		if (cc[bit])
 			bincc=bincc | (1<<bit);
-		return(bincc);
+	return(bincc);
 }
 
 void MC6809AssertInterupt(unsigned char Interupt,unsigned char waiter)// 4 nmi 2 firq 1 irq

@@ -19,6 +19,24 @@ This file is part of VCC (Virtual Color Computer).
     along with VCC (Virtual Color Computer).  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <endian.h>
+
+typedef union
+{
+	unsigned short Reg;
+	struct
+	{
+#if __BYTE_ORDER == __BIG_ENDIAN
+		unsigned char msb,lsb;
+#else
+		unsigned char lsb,msb;
+#endif
+	} B;
+} cpuregister;
+
+extern cpuregister pc,x,y,u,s,dp,d;
+extern unsigned int cc[8];
+
 void MC6809Init(void);
 int  MC6809Exec( int);
 void MC6809Reset(void);
